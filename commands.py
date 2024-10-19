@@ -2,7 +2,7 @@
 
 import click
 from flask.cli import with_appcontext
-from models import db  # Adjust the import based on your project structure
+from models import db, User, Todo  # Adjust the import based on your project structure
 
 @click.command(name='create_tables')
 @with_appcontext
