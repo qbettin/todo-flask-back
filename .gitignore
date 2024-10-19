@@ -9,4 +9,3 @@ instance/
 *.pyo
 *.env  # If you have a .env file for sensitive information
 .env
-Pipfile.lock

@@ -1,3 +1,3 @@
 from catalog import getApp
 
-app = getApp()
+app = create_app()
