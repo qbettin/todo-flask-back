@@ -6,9 +6,9 @@ from models import db
 from auth import auth
 from todos import todos
 
-def create_app():
+def create_app(config_file='config.py'):
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_pyfile(config_file)
 
     # Initialize extensions
     # eventually need to make it only allowed from the front url
@@ -16,12 +16,13 @@ def create_app():
 
     JWTManager(app)
     db.init_app(app)
-    with app.app_context():
-        db.create_all()  # Create database tables
 
     # Register blueprints
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(todos, url_prefix='/todos')
+
+    with app.app_context():
+        db.create_all()  # Create database tables
 
     @app.route('/')
     @cross_origin()
