@@ -21,7 +21,9 @@ def create_app(config_file='config.py'):
     app.register_blueprint(todos, url_prefix='/todos')
 
     with app.app_context():
-        db.create_all()  # Create database tables
+        # Check if the table exists before creating
+        if not db.engine.dialect.has_table(db.engine, 'user'):  # Replace 'user' with your table name
+            db.create_all()  # Create database tables
 
     @app.route('/')
     def index():
