@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_cors import CORS, cross_origin
 from flask_jwt_extended import JWTManager
+from sqlalchemy import inspect
 from models import db
 from auth import auth
 from todos import todos
@@ -21,8 +22,8 @@ def create_app(config_file='config.py'):
     app.register_blueprint(todos, url_prefix='/todos')
 
     with app.app_context():
-        # Check if the table exists before creating
-        if not db.engine.dialect.has_table(db.engine, 'user'):  # Replace 'user' with your table name
+        inspector = inspect(db.engine)  # Create an inspector object
+        if not inspector.has_table('user'):  # Replace 'user' with your table name
             db.create_all()  # Create database tables
 
     @app.route('/')
