@@ -21,14 +21,11 @@ def create_app(config_file='config.py'):
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(todos, url_prefix='/todos')
 
-    with app.app_context():
-        inspector = inspect(db.engine)  # Create an inspector object
-        if not inspector.has_table('user'):  # Replace 'user' with your table name
-            db.create_all()  # Create database tables
-
     @app.route('/')
     def index():
         return "<h1> Deployed to Heroku</h1>"
+
+    app.cli.add_command(create_tables)
 
     return app
 
