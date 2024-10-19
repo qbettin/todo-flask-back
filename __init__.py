@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_cors import CORS, cross_origin
 from flask_jwt_extended import JWTManager
-from config import Config
 from models import db
 from auth import auth
 from todos import todos
