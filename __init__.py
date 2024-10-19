@@ -25,9 +25,8 @@ def create_app(config_file='config.py'):
         db.create_all()  # Create database tables
 
     @app.route('/')
-    @cross_origin()
     def index():
-        return 'API is running...'
+        return "<h1> Deployed to Heroku</h1>"
 
     return app
 
