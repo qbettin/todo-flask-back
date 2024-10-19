@@ -5,6 +5,7 @@ from sqlalchemy import inspect
 from models import db
 from auth import auth
 from todos import todos
+from commands import create_tables
 
 def create_app(config_file='config.py'):
     app = Flask(__name__)
